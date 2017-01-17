@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup} from "@angular/forms";
-import {ResourceFormGroup} from "../resource-settings.service";
+import {ResourceFormGroup, StoreToControl} from "../resource-settings.service";
+import {MockStoreService} from "../mock-store.service";
 
 @Component({
   selector: 'tk-main-form',
@@ -15,7 +16,7 @@ export class MainFormComponent implements OnInit {
 
   private tkForm: FormGroup;
 
-  constructor() {
+  constructor(private mockStoreService: MockStoreService) {
   }
 
 

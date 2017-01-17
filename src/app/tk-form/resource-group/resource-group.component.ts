@@ -1,6 +1,7 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, OnDestroy} from '@angular/core';
 import {MockStoreService} from "../mock-store.service";
 import {StoreToControl, ResourceFormGroup} from "../resource-settings.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'tk-resource-group',
@@ -12,16 +13,22 @@ import {StoreToControl, ResourceFormGroup} from "../resource-settings.service";
   `,
   styleUrls: ['./resource-group.component.css']
 })
-export class ResourceGroupComponent implements OnInit {
+export class ResourceGroupComponent implements OnInit, OnDestroy {
 
   @Input() resourceGroup: ResourceFormGroup;
+  private subscription: Subscription;
 
-  constructor(private mockStoreService: MockStoreService) { }
+  constructor(private mockStore: MockStoreService) { }
 
   ngOnInit() {
-    this.mockStoreService.getStore().subscribe((store) => {
+    this.subscription = this.mockStore.getStore().subscribe((store) => {
       StoreToControl(store,this.resourceGroup);
-    })
+    });
   }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
 
 }

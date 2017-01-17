@@ -27,13 +27,13 @@ export class MockStoreService {
           this.store = {
             resource: {
               date: new Date(),
-              text: 'Foo'
+              text: 'Foo2'
             }
           };
           console.log('Updated my journal2');
           this.observableStore.next(this.store);
           // resolve(this.store)
-        },10000);
+        },5000);
       },1000);
 
 
