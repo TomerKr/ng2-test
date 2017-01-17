@@ -16,8 +16,16 @@ export const StoreToControl = (store: Store, resourceFormGroup: FormGroup) => {
   resourceFormGroup.controls['text'].reset(store[RESOURCE_NAME].text);
 };
 
-export const resourceFormGroup = new FormGroup({
-  text: new FormControl('', Validators.maxLength(5)),
-  date: new FormControl()
-});
+export class ResourceFormGroup extends FormGroup{
+  controls: {
+    text: FormControl;
+    date: FormControl;
+  };
 
+  constructor(){
+    super({
+      text: new FormControl('', Validators.maxLength(5)),
+      date: new FormControl()
+    });
+  }
+}
