@@ -5,10 +5,10 @@ import {StoreToControl, ResourceFormGroup} from "../resource-settings.service";
 @Component({
   selector: 'tk-resource-group',
   template: `
-  <div>
+  <tk-form-group>
     <input type="text" [formControl]="resourceGroup.controls.text"/>
     <input type="date" [formControl]="resourceGroup.controls.date"/>
-  </div>
+  </tk-form-group>
   `,
   styleUrls: ['./resource-group.component.css']
 })
@@ -19,7 +19,7 @@ export class ResourceGroupComponent implements OnInit {
   constructor(private mockStoreService: MockStoreService) { }
 
   ngOnInit() {
-    this.mockStoreService.getStore().then((store) => {
+    this.mockStoreService.getStore().subscribe((store) => {
       StoreToControl(store,this.resourceGroup);
     })
   }

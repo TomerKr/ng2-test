@@ -12,6 +12,7 @@ export class ResourceSettingsService {
 }
 
 export const StoreToControl = (store: Store, resourceFormGroup: FormGroup) => {
+  if(!store[RESOURCE_NAME]) return;
   resourceFormGroup.controls['date'].reset(store[RESOURCE_NAME].date);
   resourceFormGroup.controls['text'].reset(store[RESOURCE_NAME].text);
 };
