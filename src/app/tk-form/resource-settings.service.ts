@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Store, MockStoreService} from "./mock-store.service";
+import {Store} from "./mock-store.service";
 import {FormGroup, FormControl, Validators} from "@angular/forms";
 import {Http} from "@angular/http";
 
@@ -7,6 +7,7 @@ const RESOURCE_NAME = 'resource';
 
 @Injectable()
 export class ResourceSettingsService {
+  constructor(){}
 
 }
 
@@ -25,9 +26,16 @@ export class ResourceFormGroup extends FormGroup{
 
   constructor(){
     super({
-      text: new FormControl('', Validators.maxLength(5)),
+      text: new FormControl('', Validators.maxLength(10)),
       date: new FormControl()
     });
   }
 }
 
+export const fetchConfigString = 'resource-service/resource';
+export const fetchConfigFunction = () => {
+  return {
+    date: new Date(),
+    text: 'Function'
+  }
+};

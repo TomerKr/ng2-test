@@ -12,31 +12,6 @@ export class MockStoreService {
   private observableStore = new Subject<Store>();
 
   constructor() {
-
-      setTimeout(() => {
-        this.store = {
-          resource: {
-            date: new Date(),
-            text: 'Foo'
-          }
-        };
-        console.log('Updated my journal');
-        this.observableStore.next(this.store);
-        // resolve(this.store)
-        setTimeout(() => {
-          this.store = {
-            resource: {
-              date: new Date(),
-              text: 'Foo2'
-            }
-          };
-          console.log('Updated my journal2');
-          this.observableStore.next(this.store);
-          // resolve(this.store)
-        },5000);
-      },1000);
-
-
   }
 
   public getStore(): Observable<Store>{
@@ -52,6 +27,33 @@ export class MockStoreService {
     //     resolve(this.store)
     //   },1000);
     // });
+  }
+
+  public fetchData(configuration: string | Function){
+    if(typeof configuration === "string"){
+      console.log(`Got config string: ${configuration}`);
+      setTimeout(() => {
+        this.store = {
+          resource: {
+            date: new Date(),
+            text: 'String'
+          }
+        };
+        console.log('Updated my journal');
+        this.observableStore.next(this.store);
+      },1000);
+    }
+    else{
+      console.log(`Got config function that returned: ${configuration()}`);
+      const data = configuration();
+      setTimeout(() => {
+        this.store = {
+          resource: data
+        };
+        console.log('Updated my journal');
+        this.observableStore.next(this.store);
+      },1000);
+    }
   }
 
 }
