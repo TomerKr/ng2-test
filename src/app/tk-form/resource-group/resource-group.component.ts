@@ -9,6 +9,7 @@ import {Subscription} from "rxjs";
   <tk-form-group>
     <input type="text" [formControl]="resourceGroup.controls.text"/>
     <input type="date" [formControl]="resourceGroup.controls.date"/>
+    <button (click)="toggleDate()" >Toggle disable date</button>
   </tk-form-group>
   `,
   styleUrls: ['./resource-group.component.css']
@@ -17,6 +18,8 @@ export class ResourceGroupComponent implements OnInit, OnDestroy {
 
   @Input() resourceGroup: ResourceFormGroup;
   private subscription: Subscription;
+
+  private disabled = false;
 
   constructor(private mockStore: MockStoreService) { }
 
@@ -29,6 +32,12 @@ export class ResourceGroupComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  toggleDate(){
+    if(!this.disabled) this.resourceGroup.controls.date.disable();
+    else this.resourceGroup.controls.date.enable();
+    this.disabled = !this.disabled;
   }
 
 
