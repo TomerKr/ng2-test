@@ -1,6 +1,6 @@
 import {Component, OnInit, Input, OnDestroy} from '@angular/core';
 import {MockStoreService} from "../mock-store.service";
-import {StoreToControl, ResourceFormGroup} from "../resource-settings.service";
+import {StoreToControl, ResourceFormGroup, fetchConfigString} from "../resource-settings.service";
 import {Subscription} from "rxjs";
 
 @Component({
@@ -24,6 +24,7 @@ export class ResourceGroupComponent implements OnInit, OnDestroy {
     this.subscription = this.mockStore.getStore().subscribe((store) => {
       StoreToControl(store,this.resourceGroup);
     });
+    this.mockStore.fetchData(fetchConfigString);
   }
 
   ngOnDestroy(): void {

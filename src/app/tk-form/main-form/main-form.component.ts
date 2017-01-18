@@ -25,7 +25,6 @@ export class MainFormComponent implements OnInit {
     this.tkForm = new FormGroup({
       resource: new ResourceFormGroup()
     });
-    this.mockStoreService.fetchData(fetchConfigString);
   }
 
   buttonClick(){
